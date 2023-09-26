@@ -6,6 +6,8 @@ apply plugin: 'application'
 apply plugin: 'java-library'
 apply plugin: 'jacoco'
 apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+apply plugin: 'org.sonarqube'
+
 
 
 compileJava.options.encoding = "UTF-8"
@@ -23,6 +25,7 @@ buildscript {
     }
     dependencies {
         classpath "net.serenity-bdd:serenity-gradle-plugin:4.0.12"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:4.3.1.3277"
     }
 }
 
@@ -54,5 +57,13 @@ test{
         testLogging.showStandardStreams = true
         systemProperties System.getProperties()
         systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+    }
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "escano1_BaseWebScreenPlay"
+        property "sonar.organization", "escano1"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
